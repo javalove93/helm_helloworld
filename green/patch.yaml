@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: skaffold-gitops
+spec:
+  selector:
+    matchLabels:
+      app: skaffold-gitops-green
+  template:
+    metadata:
+      labels:
+        app: skaffold-gitops-green
+    spec:
+      containers:
+      - name: skaffold-gitops
+        image: javalove93/hello-go
+        env:
+        - name: COLOR
+          value: "green"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: skaffold-gitops
+spec:
+  selector:
+    app: skaffold-gitops-green

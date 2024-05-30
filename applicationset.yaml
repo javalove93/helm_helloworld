@@ -9,6 +9,8 @@ spec:
         revision: HEAD
         directories:
           - path: hello-world
+          - path: blue
+          - path: green
   template:
     metadata:
       name: '{{path.basename}}'

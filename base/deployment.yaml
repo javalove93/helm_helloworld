@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: skaffold-gitops
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: skaffold-gitops
+  template:
+    metadata:
+      labels:
+        app: skaffold-gitops
+    spec:
+      containers:
+      - name: skaffold-gitops
+        image: javalove93/hello-go
+        resources:
+          limits:
+            memory: "64Mi"
+            cpu: "0.1"
+        ports:
+        - containerPort: 80
