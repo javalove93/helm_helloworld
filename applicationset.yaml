@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: helm-helloworld
+spec:
+  generators:
+    - git:
+        repoURL: https://github.com/javalove93/helm_helloworld.git
+        revision: HEAD
+        directories:
+          - path: hello-world
+  template:
+    metadata:
+      name: '{{path.basename}}'
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/javalove93/helm_helloworld.git
+        targetRevision: HEAD
+        path: '{{path}}'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: appset
